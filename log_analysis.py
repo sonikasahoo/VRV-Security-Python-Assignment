@@ -12,7 +12,7 @@ def parse_log_file(file_path):
         with open(file_path, 'r') as file:
             for line in file:
                 # Use Regex to extract values like IP address, status, etc.
-                match = re.match(r'(?P<ip>\d+\.\d+\.\d+\.\d+) .* "(?P<method>[A-Z]+) (?P<endpoint>/\S*) HTTP/[\d.]+" (?P<status>\d+) (?P<size>\d+)( "(?P<message>.*)")?', line)
+                match = re.match(r'^(?P<ip>\d+\.\d+\.\d+\.\d+) - - \[(?P<timestamp>.+?)\] "(?P<method>GET|POST|PUT|PATCH|DELETE) (?P<endpoint>/\S*) HTTP/[\d.]+" (?P<status>\d{3}) (?P<size>\d+)( "(?P<message>.+)")?$', line)
 
                 if match:
                     # Add data as a dictionary
